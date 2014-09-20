@@ -9,9 +9,9 @@ import requests
 import yaml
 import calendar
 import datetime
+import ConfigParser
+import sys
 
-EMAIL = ''
-PASSWORD = ''
 
 LOGIN_URL = 'https://mwomercs.com/do/login'
 STATS_URL = 'https://mwomercs.com/profile/stats?type={0}'
@@ -89,6 +89,22 @@ class MWOTableParser(HTMLParser):
                 self._headings.append(data)
 
 
+
+def parse_config(filename):
+    '''
+    Load a config file with username, password
+    '''
+    config_dict = {}
+    section = 'Mechwarrior'
+    config = ConfigParser.ConfigParser()
+    config.read(filename)
+    options = config.options(section)
+    for option in options:
+        config_dict.update({option: config.get(section, option)})
+    return config_dict
+
+
+
 def parse_type(session, get_str):
     '''
     Parse the particular type of statistic
@@ -109,14 +125,16 @@ def main():
     '''
     Main Function
     '''
-    session = requests.session()
+
+    config = parse_config('mwostatter.ini')
 
     login_data = {
-        'email': EMAIL,
-        'password': PASSWORD,
+        'email': config['email'],
+        'password': config['password'],
         'submit': 'login'
     }
 
+    session = requests.session()
     session.post(LOGIN_URL, data=login_data)
     data_dict = {}
     stats_dict = {}
@@ -136,4 +154,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())

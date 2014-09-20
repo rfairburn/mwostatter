@@ -1,28 +1,24 @@
-# Dummy configs
-# Statement for enabling the development environment
-DEBUG = True
+'''
+Basic configuration settings
+'''
 
-# Define the application directory
 import os
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))  
+_basedir = os.path.abspath(os.path.dirname(__file__))
 
-# Define the database - we are working with
-# SQLite for this example
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'app.db')
+DEBUG = False
+
+ADMINS = frozenset(['youremail@yourdomain.com'])
+SECRET_KEY = 'This string will be replaced with a proper key in production.'
+
+SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(_basedir, 'app.db')
 DATABASE_CONNECT_OPTIONS = {}
 
-# Application threads. A common general assumption is
-# using 2 per available processor cores - to handle
-# incoming requests using one and performing background
-# operations using the other.
-THREADS_PER_PAGE = 2
+THREADS_PER_PAGE = 8
 
-# Enable protection agains *Cross-site Request Forgery (CSRF)*
-CSRF_ENABLED     = True
+CSRF_ENABLED = True
+CSRF_SESSION_KEY = "somethingimpossibletoguess"
 
-# Use a secure, unique and absolutely secret key for
-# signing the data. 
-CSRF_SESSION_KEY = "secret"
-
-# Secret key for signing cookies
-SECRET_KEY = "secret"
+RECAPTCHA_USE_SSL = False
+RECAPTCHA_PUBLIC_KEY = '6LeYIbsSAAAAACRPIllxA7wvXjIE411PfdB2gt2J'
+RECAPTCHA_PRIVATE_KEY = '6LeYIbsSAAAAAJezaIq3Ft_hSTo0YtyeFG-JgRtu'
+RECAPTCHA_OPTIONS = {'theme': 'white'}

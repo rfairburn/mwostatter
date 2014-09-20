@@ -35,7 +35,7 @@ class MWOTableParser(HTMLParser):
         self.data_dict = {}
         self._td_count = 0
         self._key_name = ''
-        self._values = []
+        self._values = {}
         self._headings = []
 
     def handle_starttag(self, tag, attrs):
@@ -46,7 +46,7 @@ class MWOTableParser(HTMLParser):
             self._process_data = True
         if tag == 'tr':
             self._is_tr = True
-            self._values = []
+            self._values = {}
         if tag == 'td':
             self._is_td = True
             self._td_count += 1
@@ -80,7 +80,7 @@ class MWOTableParser(HTMLParser):
                 if self._td_count == 1:
                     self._key_name = data
                 else:
-                    self._values.append(
+                    self._values.update(
                         {
                             self._headings[self._td_count - 1]: data
                         }

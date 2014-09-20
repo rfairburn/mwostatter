@@ -7,6 +7,7 @@ MWOStatter
 Prerequisites
 =============
 pyyaml
+requests
 
 Usage
 =====

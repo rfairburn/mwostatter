@@ -112,9 +112,9 @@ def main():
     session = requests.session()
 
     login_data = {
-            'email': EMAIL,
-            'password': PASSWORD,
-            'submit': 'login'
+        'email': EMAIL,
+        'password': PASSWORD,
+        'submit': 'login'
     }
 
     session.post(LOGIN_URL, data=login_data)
@@ -124,13 +124,13 @@ def main():
     for get_str in get_strs:
         stats_dict.update({get_str: parse_type(session, get_str)})
     data_dict = {
-                    'timestamp': str(
-                        calendar.timegm(
-                            datetime.datetime.utcnow().timetuple()
-                        )
-                    ),
-                    'stats': stats_dict
-                }
+        'timestamp': str(
+            calendar.timegm(
+                datetime.datetime.utcnow().timetuple()
+            )
+        ),
+        'stats': stats_dict
+    }
 
     print yaml.dump(data_dict, default_flow_style=False)
 

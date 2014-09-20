@@ -1,3 +1,4 @@
 *.ini
 *.pyc
 app.db
+web/instance/secret_key

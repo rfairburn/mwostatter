@@ -29,7 +29,7 @@ def install_secret_key(app, filename='secret_key'):
         full_path = os.path.dirname(filename)
         if not os.path.isdir(full_path):
             print('mkdir -p {filename}'.format(filename=full_path))
-        print('head -c 24 /dev/urandom > {full_path}{filename}'.format(full_path=full_path, filename=filename))
+        print('head -c 24 /dev/urandom > {filename}'.format(filename=filename))
         sys.exit(1)
 
 if not app.config['DEBUG']:

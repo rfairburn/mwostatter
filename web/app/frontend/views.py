@@ -10,13 +10,13 @@ mod = Blueprint('frontend', __name__)
 
 @mod.route('/')
 def index():
-  return render_template("index.html", user=g.user)
+    return render_template('index.html', user=g.user)
 
 @mod.before_request
 def before_request():
-  """
-  pull user's profile from the database before every request are treated
-  """
-  g.user = None
-  if 'user_id' in session:
+    '''
+    pull user's profile from the database before every request are treated
+    '''
+    g.user = None
+    if 'user_id' in session:
     g.user = User.query.get(session['user_id'])

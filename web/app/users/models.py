@@ -12,15 +12,15 @@ class User(db.Model):
     status = db.Column(db.SmallInteger, default=USER.NEW)
 
     def __init__(self, name=None, email=None, password=None):
-      self.name = name
-      self.email = email
-      self.password = password
+        self.name = name
+        self.email = email
+        self.password = password
 
     def getStatus(self):
-      return USER.STATUS[self.status]
+        return USER.STATUS[self.status]
 
     def getRole(self):
-      return USER.ROLE[self.role]
+        return USER.ROLE[self.role]
 
     def __repr__(self):
         return '<User %r>' % (self.name)

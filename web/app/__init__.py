@@ -39,8 +39,8 @@ if not app.config['DEBUG']:
 def not_found(error):
     return render_template('404.html'), 404
 
-from app.users.views import mod as usersModule
-app.register_blueprint(usersModule)
+from app.user.views import mod as userModule
+app.register_blueprint(userModule)
 from app.frontend.views import mod as frontendModule
 app.register_blueprint(frontendModule)
 

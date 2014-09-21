@@ -10,7 +10,17 @@
     {% endblock %}
   </head>
   <body>
-    <div id="header">{% block header %}MWOStatter{% endblock %}</div>
+    <div id="header">
+      {%- block header -%}MWOStatter | 
+      <a href="/">Home</a> |
+        {%- if user %}
+      <a href="/user/profile">Profile</a> |
+      <a href="/user/logout">Logout {{ user.name }}</a>
+        {%- else %}
+      <a href="/user/login">Login</a>
+        {%- endif %}
+      {%- endblock %}
+    </div>
     <div id="messages-wrap">
       <div id="messages">
         {% for category, msg in get_flashed_messages(with_categories=true) %}

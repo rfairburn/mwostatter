@@ -2,9 +2,9 @@ from flask import Blueprint, request, render_template, flash, g, session, redire
 from werkzeug import check_password_hash, generate_password_hash
 
 from app import db
-from app.users.forms import RegisterForm, LoginForm
-from app.users.models import User
-from app.users.decorators import requires_login
+from app.user.forms import RegisterForm, LoginForm
+from app.user.models import User
+from app.user.decorators import requires_login
 
 mod = Blueprint('frontend', __name__)
 
@@ -19,4 +19,4 @@ def before_request():
     '''
     g.user = None
     if 'user_id' in session:
-    g.user = User.query.get(session['user_id'])
+        g.user = User.query.get(session['user_id'])
